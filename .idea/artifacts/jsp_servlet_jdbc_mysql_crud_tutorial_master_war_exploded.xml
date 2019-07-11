@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="jsp-servlet-jdbc-mysql-crud-tutorial-master:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/jsp_servlet_jdbc_mysql_crud_tutorial_master_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="jsp-servlet-jdbc-mysql-crud-tutorial-master" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="jsp-servlet-jdbc-mysql-crud-tutorial-master/web/Web" />
+    </root>
+  </artifact>
+</component>
