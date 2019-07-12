@@ -9,9 +9,9 @@
 	<center>
 		<h1>User Management</h1>
         <h2>
-        	<a href="new">Add New User</a>
+        	<a href="insert">Add New User</a>
         	&nbsp;&nbsp;&nbsp;
-        	<a href="list">List All Users</a>
+        	<a href="/">List All Users</a>
         	
         </h2>
 	</center>
@@ -32,7 +32,7 @@
                     <td><c:out value="${user.email}" /></td>
                     <td><c:out value="${user.country}" /></td>
                     <td>
-                    	<a href="edit?id=<c:out value='${user.id}' />">Edit</a>
+                    	<a href="update?id=<c:out value='${user.id}' />">Edit</a>
                     	&nbsp;&nbsp;&nbsp;&nbsp;
                     	<a href="delete?id=<c:out value='${user.id}' />">Delete</a>                    	
                     </td>

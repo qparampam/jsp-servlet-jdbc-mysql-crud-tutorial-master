@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jsp-servlet-jdbc-mysql-crud-tutorial-master" target="7" />
+      <module name="jsp-servlet-jdbc-mysql-crud-tutorial-master" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
