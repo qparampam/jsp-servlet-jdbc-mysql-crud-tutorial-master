@@ -10,10 +10,14 @@ import java.util.List;
 public class UserDaoImpl implements UserDAO {
     private Executor executor;
 
-    public UserDaoImpl(Connection connection) {
+
+    public UserDaoImpl() {
+        Connection connection = DBHelper.getInstance().getConnection();
         this.executor = new Executor(connection);
         createTable();
     }
+
+
 
     private void createTable() {
         try {
