@@ -1,6 +1,7 @@
 package crud.service;
 
 import crud.dao.UserDAO;
+import crud.dao.UserDaoImpl;
 import crud.model.User;
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl userServiceImpl;
 
-    private UserDAO userDAO = null;
+    private UserDAO userDAO = new UserDaoImpl();
 
     public static UserServiceImpl getInstance() {
         if (userServiceImpl == null) {
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @SuppressWarnings("ThrowFromFinallyBlock")
     public List<User> getAllUser() throws SQLException {
         List <User> users;
-        users =userDAO.selectAllUsers();
+        users = userDAO.selectAllUsers();
 
         return  users;
     }
