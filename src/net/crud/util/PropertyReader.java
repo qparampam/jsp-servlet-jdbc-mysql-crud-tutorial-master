@@ -1,26 +1,37 @@
 package crud.util;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class PropertyReader {
-    private static Properties p = new Properties();
+//    private static Properties p = new Properties();
 
 
-    public static String getProperty(String prop) {
+    public static String getProperty(String property) {
 
-        String result = null;
-
+        Properties properties = new Properties();
         try {
-            p.load(PropertyReader.class.getClassLoader()
+            properties.load(PropertyReader.class.getClassLoader()
                     .getResourceAsStream("my.properties"));
-
-            result = p.getProperty(prop);
-
-
+            return properties.getProperty(property);
         } catch (IOException e) {
-            System.err.println("ОШИБКА: Файл my.p отсуствует!");
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
-        return result;
+        return null;
+
+//        String result = null;
+//
+//        try {
+//            p.load(PropertyReader.class.getClassLoader()
+//                    .getResourceAsStream("/my.properties"));
+//
+//            result = p.getProperty(prop);
+//
+//
+//        } catch (IOException e) {
+//            System.err.println("ОШИБКА: Файл my.p отсуствует!");
+//        }
+//        return result;
     }
 }

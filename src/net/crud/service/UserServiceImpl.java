@@ -1,20 +1,28 @@
 package crud.service;
 
+import crud.dao.DBHelper;
 import crud.dao.UserDAO;
 import crud.dao.UserDaoImpl;
 import crud.model.User;
+import org.hibernate.SessionFactory;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl userServiceImpl;
+    private UserDAO userDAO;
 
-    private UserDAO userDAO = new UserDaoImpl();
+    private UserServiceImpl(){
+        SessionFactory sessionFactory = DBHelper.getSessionFactory(DBHelper.getConfiguration());
+        userDAO = new UserDaoImpl(sessionFactory);
+    }
 
     public static UserServiceImpl getInstance() {
         if (userServiceImpl == null) {
             userServiceImpl = new UserServiceImpl();
         }
+
         return userServiceImpl;
     }
 
