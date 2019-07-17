@@ -17,21 +17,26 @@ public class UserDaoImpl implements UserDAO {
 
     public void insertUser(User user){
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
     public User selectUser(int id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             transaction.commit();
@@ -42,13 +47,17 @@ public class UserDaoImpl implements UserDAO {
                 transaction.rollback();
             }
             return null;
+        } finally {
+            session.close();
         }
     }
 
     public List<User> selectAllUsers() {
         List<User> list;
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             Query query = session.createQuery("FROM User");
             list = query.list();
@@ -60,12 +69,16 @@ public class UserDaoImpl implements UserDAO {
                 transaction.rollback();
             }
             return null;
+        } finally {
+            session.close();
         }
     }
 
     public void deleteUser(int id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             session.delete(user);
@@ -75,12 +88,16 @@ public class UserDaoImpl implements UserDAO {
             if(transaction !=null){
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
     public void updateUser(User user) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.update(user);
             transaction.commit();
@@ -89,6 +106,8 @@ public class UserDaoImpl implements UserDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
