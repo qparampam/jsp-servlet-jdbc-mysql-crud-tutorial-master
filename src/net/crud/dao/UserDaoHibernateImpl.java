@@ -7,10 +7,10 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
 
-public class UserDaoImpl implements UserDAO {
+public class UserDaoHibernateImpl implements UserDAO {
     private SessionFactory sessionFactory;
 
-    public UserDaoImpl(SessionFactory sessionFactory) {
+    public UserDaoHibernateImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -112,7 +112,7 @@ public class UserDaoImpl implements UserDAO {
     }
 
 //    public static void main(String[] args) {
-//        UserDaoImpl userDao = new UserDaoImpl(DBHelper.getSessionFactory(DBHelper.getConfiguration()));
+//        UserDaoHibernateImpl userDao = new UserDaoHibernateImpl(DBHelper.getSessionFactory(DBHelper.getConfiguration()));
 //        userDao.insertUser(new User(1,"2","3","4"));
 //    }
 }
