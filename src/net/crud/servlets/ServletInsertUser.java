@@ -36,6 +36,6 @@ public class ServletInsertUser extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("list");
+        response.sendRedirect("admin");
     }
 }

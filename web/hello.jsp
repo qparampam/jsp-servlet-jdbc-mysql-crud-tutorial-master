@@ -15,5 +15,11 @@
 
 <h1>It's Alive!</h1>
 <body>
+<center>
+    <h1>Выходи</h1>
+    <h2>
+        <a href="logout">Logout</a>
+    </h2>
+</center>
 </body>
 </html>

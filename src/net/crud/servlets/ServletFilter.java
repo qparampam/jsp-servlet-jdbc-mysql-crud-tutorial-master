@@ -1,29 +1,37 @@
 package crud.servlets;
 
 import crud.model.User;
-import crud.service.UserServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.LogRecord;
 
-@WebFilter(urlPatterns = {"/list", "/delete", "/insert", "/update"})
+// Мне нужно проверять, чтобы на страницу user мог попасть только user
+// Но он уходит в цикл
+
+
+@WebFilter(urlPatterns = {"/admin", "/delete", "/insert", "/update", "/user"})
 public class ServletFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         User user = (User) request.getSession().getAttribute("user");
-        if (user.getRole().equals("admin")) {
+         if(user != null && user.getRole().equals("admin")) {
             filterChain.doFilter(request, servletResponse);
+        } else if(user != null && user.getRole().equals("user")){
+             if (request.getRequestURL().toString().contains("user")){
+                 filterChain.doFilter(request, servletResponse);
+             } else {
+                 HttpServletResponse response = (HttpServletResponse) servletResponse;
+                 response.sendRedirect("user");
+             }
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("hello.jsp");
-            dispatcher.forward(request, servletResponse);
-        }
+                 HttpServletResponse response = (HttpServletResponse) servletResponse;
+                 response.sendRedirect("/");
+         }
     }
 
     @Override

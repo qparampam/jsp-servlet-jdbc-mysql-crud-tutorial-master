@@ -12,7 +12,8 @@
         	<a href="insert">Add New User</a>
         	&nbsp;&nbsp;&nbsp;
         	<a href="list">List All Users</a>
-        	
+
+            <a href="logout">Logout</a>
         </h2>
 	</center>
     <div align="center">

@@ -32,9 +32,12 @@ public class ServletLogin extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (user!=null && user.getPassword().equals(password)) {
+        if (user!=null && user.getPassword().equals(password) && user.getRole().equals("admin")) {
             request.getSession().setAttribute("user", user);
-            response.sendRedirect("list");
+            response.sendRedirect("admin");
+        } else if (user!=null && user.getPassword().equals(password) && user.getRole().equals("user")){
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("user");
         }
         else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");

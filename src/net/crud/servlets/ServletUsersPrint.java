@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/list")
+@WebServlet("/admin")
 public class ServletUsersPrint extends HttpServlet {
 
     private UserServiceImpl userServiceimp = UserServiceImpl.getInstance();
