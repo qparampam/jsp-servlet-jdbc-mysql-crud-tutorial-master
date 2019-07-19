@@ -36,10 +36,11 @@ public class ServletUpdateUser extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String country = request.getParameter("country");
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
 
-        User book = new User(id, name, email, country);
+        User book = new User(id, name, login, password, role);
         try {
             userServiceimp.updateUser(book);
         } catch (SQLException e) {

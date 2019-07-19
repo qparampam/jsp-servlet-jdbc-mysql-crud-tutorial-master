@@ -12,30 +12,37 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/insert")
-public class ServletInsertUser extends HttpServlet {
-
+@WebServlet("/")
+public class ServletLogin extends HttpServlet {
     private UserServiceImpl userServiceimp = UserServiceImpl.getInstance();
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-insert.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         dispatcher.forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
-        String name = request.getParameter("name");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String role = request.getParameter("role");
-        User newUser = new User(name, login, password, role);
+        User user = null;
         try {
-            userServiceimp.addUser(newUser);
+            user = userServiceimp.getUserLogin(login);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("list");
+        if (user!=null && user.getPassword().equals(password)) {
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("list");
+        }
+        else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

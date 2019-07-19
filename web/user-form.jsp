@@ -47,19 +47,27 @@
             <tr>
                 <th>User Email: </th>
                 <td>
-                	<input type="text" name="email" size="45"
-                			value="<c:out value='${user.email}' />"
+                	<input type="text" name="login" size="45"
+                			value="<c:out value='${user.login}' />"
                 	/>
                 </td>
             </tr>
             <tr>
                 <th>Country: </th>
                 <td>
-                	<input type="text" name="country" size="15"
-                			value="<c:out value='${user.country}' />"
+                	<input type="text" name="password" size="15"
+                			value="<c:out value='${user.password}' />"
                 	/>
                 </td>
             </tr>
+			<tr>
+				<th>User Role: </th>
+				<td>
+					<input type="text" name="role" size="45"
+						   value="<c:out value='${user.role}' />"
+					/>
+				</td>
+			</tr>
             <tr>
             	<td colspan="2" align="center">
             		<input type="submit" value="Save" />

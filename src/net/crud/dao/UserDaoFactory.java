@@ -10,7 +10,7 @@ public class UserDaoFactory {
     public UserDAO WhoIsWho(){
 
         if(technology.equals("hibernate")){
-            return new UserDaoHibernateImpl(DBHelper.getSessionFactory(DBHelper.getConfiguration()));
+            return new UserDaoHibernateImpl(DBHelper.getConfiguration());
         } else {
             return new UserDaoJDBCImpl();
         }

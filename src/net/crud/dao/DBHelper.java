@@ -40,7 +40,7 @@ public class DBHelper {
     }
 
 
-    public static Configuration getConfiguration() {
+    public static SessionFactory getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
         configuration.setProperty("hibernate.dialect", PropertyReader.getProperty("dialect"));
@@ -50,14 +50,16 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.password", PropertyReader.getProperty("password"));
         configuration.setProperty("hibernate.show_sql", PropertyReader.getProperty("show_sql"));
         configuration.setProperty("hibernate/hbm2ddl.auto",PropertyReader.getProperty("hbm2ddl.auto"));
-        return configuration;
-    }
-    public static SessionFactory getSessionFactory(Configuration configuration) {
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
+//    public static SessionFactory getSessionFactory(Configuration configuration) {
+//        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+//        builder.applySettings(configuration.getProperties());
+//        ServiceRegistry serviceRegistry = builder.build();
+//        return configuration.buildSessionFactory(serviceRegistry);
+//    }
 
     public static DBHelper getInstance() {
         if (dbHelper == null) {

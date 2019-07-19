@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
             userDAO.insertUser(user);
     }
 
+    public User getUserLogin(String login) throws SQLException {
+        User user = userDAO.selectUserByLogin(login);
+        return user;
+    }
+
     // первая страничка которая выбрасывается, как открывать страницу
 
     @SuppressWarnings("ThrowFromFinallyBlock")

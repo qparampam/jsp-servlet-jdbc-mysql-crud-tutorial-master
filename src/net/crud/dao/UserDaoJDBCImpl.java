@@ -23,8 +23,9 @@ public class UserDaoJDBCImpl implements UserDAO{
         try {
             executor.execUpdate("create table if not exists users (id bigint not null auto_increment," +
                     "name varchar(256)," +
-                    "email varchar(256)," +
-                    "country varchar(256)," +
+                    "login varchar(256)," +
+                    "password varchar(256)," +
+                    "role varchar(256)," +
                     "primary key (id))");
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -32,17 +33,19 @@ public class UserDaoJDBCImpl implements UserDAO{
     }
 
     public void insertUser(User user) throws SQLException {
-        executor.execUpdate("insert into users (name, email, country) values " +
-                "(\""+ user.getName() + "\", \"" + user.getEmail() + "\", \"" + user.getCountry() + "\" );");
+        executor.execUpdate("insert into users (name, login, password, role) values " +
+                "(\""+ user.getName() + "\", \"" + user.getLogin() + "\", " +
+                "\"" + user.getPassword() + "\", \""+ user.getRole() + "\" );");
     }
 
     public User selectUser(int id) throws SQLException {
         return executor.execQuery("select * from users where id='" + id + "'", result -> {
             result.next();
             String name = result.getString("name");
-            String email = result.getString("email");
-            String country = result.getString("country");
-            return new User(id, name, email, country);
+            String login = result.getString("login");
+            String password = result.getString("password");
+            String role = result.getString("role");
+            return new User(id, name, login, password, role);
         });
     }
 
@@ -52,39 +55,37 @@ public class UserDaoJDBCImpl implements UserDAO{
             while (result.next()) {
                 int id = result.getInt("id");
                 String name = result.getString("name");
-                String email = result.getString("email");
-                String country = result.getString("country");
-                users.add(new User(id, name, email, country));
+                String login = result.getString("login");
+                String password = result.getString("password");
+                String role = result.getString("role");
+                users.add(new User(id, name, login, password, role));
             }
             return users;
         });
     }
 
     public void deleteUser(int id) throws SQLException {
-        executor.execUpdate("delete from users  where id='" + id + "'");
+        executor.execUpdate("delete from users where id='" + id + "'");
     }
 
     public void updateUser(User user) throws SQLException {
-        executor.execUpdate("UPDATE users SET name ='" + user.getName() + "',email='"
-                + user.getEmail() + "', country='" + user.getCountry()
+        executor.execUpdate("UPDATE users SET name ='" + user.getName() + "',login='"
+                + user.getLogin() + "', password='" + user.getPassword() + "', role='" + user.getRole()
                 +   "' WHERE id = '"
                 + user.getId() + "'; ");
 
     }
 
-    private void printSQLException(SQLException ex) {
-        for (Throwable e : ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
+    @Override
+    public User selectUserByLogin(String log) throws SQLException {
+        return executor.execQuery("select * from users where login='" + log + "'", result -> {
+            result.next();
+            int id = result.getInt("id");
+            String name = result.getString("name");
+            String login = result.getString("login");
+            String password = result.getString("password");
+            String role = result.getString("role");
+            return new User(id, name, login, password, role);
+        });
     }
 }

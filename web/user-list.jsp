@@ -11,7 +11,7 @@
         <h2>
         	<a href="insert">Add New User</a>
         	&nbsp;&nbsp;&nbsp;
-        	<a href="/">List All Users</a>
+        	<a href="list">List All Users</a>
         	
         </h2>
 	</center>
@@ -21,16 +21,18 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Country</th>
+                <th>Login</th>
+                <th>Password</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
             <c:forEach var="user" items="${listUser}">
                 <tr>
                     <td><c:out value="${user.id}" /></td>
                     <td><c:out value="${user.name}" /></td>
-                    <td><c:out value="${user.email}" /></td>
-                    <td><c:out value="${user.country}" /></td>
+                    <td><c:out value="${user.login}" /></td>
+                    <td><c:out value="${user.password}" /></td>
+                    <td><c:out value="${user.role}" /></td>
                     <td>
                     	<a href="update?id=<c:out value='${user.id}' />">Edit</a>
                     	&nbsp;&nbsp;&nbsp;&nbsp;

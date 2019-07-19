@@ -13,28 +13,48 @@ public class User {
 	@Column(name = "name")
     private String name;
 
-//	@Column(name = "email")
-    private String email;
+	@Column(name = "login")
+    private String login;
 
-	@Column(name = "country")
-    private String country;
+	@Column(name = "password")
+    private String password;
+
+	@Column(name = "role")
+	private String role;
 	
 	public User() {
 	}
 	
-	public User(String name, String email, String country) {
+	public User(String name, String login, String password) {
 		super();
 		this.name = name;
-		this.email = email;
-		this.country = country;
+		this.login = login;
+		this.password = password;
 	}
 
-	public User(int id, String name, String email, String country) {
+	public User(int id, String name, String login, String password) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.country = country;
+		this.login = login;
+		this.password = password;
+	}
+
+	public User(String name, String login, String password, String role) {
+		super();
+		this.name = name;
+		this.login = login;
+		this.password = password;
+		this.role = role;
+	}
+
+	public User(int id, String name, String login, String password, String role) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.login = login;
+		this.password = password;
+		this.role = role;
 	}
 
 	public int getId() {
@@ -49,16 +69,24 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
-	public String getCountry() {
-		return country;
+	public String getPassword() {
+		return password;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 }
